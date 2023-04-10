@@ -1,0 +1,194 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ativos Agora | Favoritos</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;400&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/calmui.css">
+    <link rel="stylesheet" href="assets/css/tooltip.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQJNTQS318"></script>
+    <script type="text/javascript"  src="assets/js/notifit.js"></script>
+    <link rel="stylesheet" href="assets/css/notifit.css">
+    <link rel="stylesheet" href="assets/css/select2.css">
+    <script type="text/javascript" src="assets/js/select2.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.rawgit.com/rastikerdar/vazir-font/v19.2.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript"  src="assets/js/panzoom.js"></script>
+    <script data-ad-client="ca-pub-1667060673303511" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YQJNTQS318');
+</script>
+<body>
+<nav style="display: none;" id="menunav" class="navbar navbar-expand-lg navbar-dark navbar-style">
+    <div class="container-fluid">
+        <a class="navbar-brand nav-link" aria-current="page" id="resetButton"><img src="images/logo.png" alt="Loading"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/indices">Índices e Hedges</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/acoes">Ações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/criptomoedas">Criptomoedas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fiis">Fundos Imobiliários</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="/etfs">ETFs Brasil</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/nasdaq">NASDAQ</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/favoritos">Favoritos</a>
+                </li>
+            </ul>
+            <select class="js-example-placeholder-multiple js-states form-control" multiple="" id="select" onchange="setSelect(sessionStorage.getItem('view'))"></select>
+        </div>
+    </div>
+</nav>
+<div class="empty" id="empty" style="display: none;">
+    <b>Nenhum ativo adicionado aos favoritos!</b>
+    <span>Adicione e visualize seus ativos favoritos de forma mais rápida.</span>
+</div>
+<div class="parent" style="overflow: hidden; user-select: none; touch-action: none; transform: scale(1);">
+    <div style="cursor: move; user-select: none; touch-action: none; transform-origin: 50% 50%; transition: none 0s ease 0s; transform: scale(1) translate(0px, 0x);">
+        <div class="loading">
+            <div class="master-loading">
+                <div class="divs-loading">
+                    <div></div><div></div><div></div><div></div>
+                </div>
+            </div>
+            <span>Carregando...</span>
+        </div>
+    </div>
+</div>
+<div class="parent" style="overflow: hidden; user-select: none; touch-action: none; transform: scale(1);">
+    <div id="chart" style="cursor: move; user-select: none; touch-action: none; transform-origin: 50% 50%; transition: none 0s ease 0s; transform: scale(1) translate(0px, 0x);">
+        <div class="loading">
+            <div class="master-loading">
+                <div class="divs-loading">
+                    <div></div><div></div><div></div><div></div>
+                </div>
+            </div>
+            <span>Carregando...</span>
+        </div>
+    </div>
+</div>
+<div id="tips" class="ftr">
+    <span class="tips">💡 Clique duas vezes no ativo para ver mais informações sobre ele! 😉</span>
+    <span class="email">Confira nossas redes sociais:
+        &nbsp;&nbsp;
+        <a target="_blank" title="Twitter" href="https://twitter.com/AtivosAgora" class="fab fa-twitter"></a>
+        <a target="_blank" title="Instagram" href="https://instagram.com/ativosagora" class="fab fa-instagram"></a>
+    </span>
+</div>
+<div id="modals"></div>
+<script>
+
+if (localStorage.getItem("favoritos_ativo") === null || localStorage.getItem("favoritos_ativo") == 0) {
+            
+    sessionStorage.setItem("view", "favoritos");
+
+    document.getElementById("empty").style.display = "block";
+    document.getElementById("chart").style.cursor = "auto";
+
+    $('.nav-link').removeClass(`active`);
+    $('#favoritos').addClass(`active`);
+
+    localStorage.setItem("selectOptions", "");
+    localStorage.setItem("controlSelect", 0);
+
+    $('#select option:enabled').remove();
+
+    
+    $(".js-example-placeholder-multiple").select2({
+        placeholder: "Pesquisar"
+    });
+
+    $(".loading").remove();
+    $("#menunav").show();
+
+}else{
+    loadPage('favoritos');
+
+    function loadPage(id){
+        $('#chart').html(`
+            <div class="loading">
+                <div class="master-loading">
+                    <div class="divs-loading">
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                </div>
+                <span>Carregando...</span>
+            </div>
+        `);
+
+        localStorage.setItem("selectOptionsSelected", '');
+
+        const elem = document.getElementById('chart');
+        const resetButton = document.getElementById('resetButton');
+        const panzoom = Panzoom(elem, { contain: 'outside', startScale: 1 });
+        const parent = elem.parentElement
+        // No function bind needed
+        resetButton.addEventListener('click', panzoom.reset)
+        parent.addEventListener('wheel', panzoom.zoomWithWheel);
+
+        sessionStorage.setItem("view", id);
+
+        $('.nav-link').removeClass(`active`);
+        $('#'+id).addClass(`active`);
+
+        localStorage.setItem("selectOptions", "");
+        localStorage.setItem("controlSelect", 0);
+
+        $('#select option:enabled').remove();
+
+        showTreemap(id);
+    }
+
+    if(sessionStorage.getItem("view") === null){
+        sessionStorage.setItem("view", "outros");
+    }
+
+    setInterval(() => {
+        showTreemap(sessionStorage.getItem("view"));
+    }, 300000);
+
+    $(".js-example-placeholder-multiple").select2({
+        placeholder: "Pesquisar"
+    });
+}
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YQJNTQS318');
+</script>
+</body>
+</html>
